@@ -3,50 +3,50 @@
 #include <vector>
 #include <chrono>
 
-void selectionSort(std::vector<int>& arr) {
-    int n = arr.size();
+void selectionSort(std::vector<int>& arreglo) {
+    int n = arreglo.size();
     for (int i = 0; i < n-1; i++) {
-        int min_idx = i;
+        int minimo = i;
         for (int j = i+1; j < n; j++) {
-            if (arr[j] < arr[min_idx]) {
-                min_idx = j;
+            if (arreglo[j] < arreglo[minimo]) {
+                minimo = j;
             }
         }
-        std::swap(arr[i], arr[min_idx]);
+        std::swap(arreglo[i], arreglo[minimo]);
     }
 }
 
-std::vector<int> readArrayFromFile(const std::string& filename) {
-    std::ifstream infile(filename);
-    std::vector<int> arr;
+std::vector<int> Leer(const std::string& archivo) {
+    std::ifstream infile(archivo);
+    std::vector<int> arreglo;
     int value;
     while (infile >> value) {
-        arr.push_back(value);
+        arreglo.push_back(value);
     }
-    return arr;
+    return arreglo;
 }
 
-void writeArrayToFile(const std::vector<int>& arr, const std::string& filename) {
-    std::ofstream outfile(filename);
-    for (const int& value : arr) {
+void Escribir(const std::vector<int>& arreglo, const std::string& archivo) {
+    std::ofstream outfile(archivo);
+    for (const int& value : arreglo) {
         outfile << value << " ";
     }
 }
 
 int main() {
-    std::string inputFilename = "input.txt";
-    std::string outputFilename = "output.txt";
+    std::string NombreIn = "InputCienMil.txt"; // Archivo con los datos de entrada, cambiar el nombre para probar con otros archivos
+    std::string NombreOut = "InputOrdenado.txt";
     
-    std::vector<int> arr = readArrayFromFile(inputFilename);
+    std::vector<int> arreglo = Leer(NombreIn);
 
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    selectionSort(arr);
+    selectionSort(arreglo);
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     
     std::chrono::duration<double> elapsed = end - start;
     std::cout << "Tiempo de Selection Sort: " << elapsed.count() << " segundos" << std::endl;
 
-    writeArrayToFile(arr, outputFilename);
+    Escribir(arreglo, NombreOut);
 
     return 0;
 }
