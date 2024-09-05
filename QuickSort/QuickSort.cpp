@@ -55,11 +55,11 @@ int main() {
     }
     inputFile.close();
 
-    int tamaño = arreglo.size();
+    int largo = arreglo.size();
 
     // Medición del tiempo de ejecución
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    quickSort(arreglo, 0, tamaño - 1);
+    quickSort(arreglo, 0, largo - 1);
     high_resolution_clock::time_point stop = high_resolution_clock::now();
 
     std::chrono::microseconds duration = duration_cast<std::chrono::microseconds>(stop - start);
@@ -71,7 +71,7 @@ int main() {
         return 1;
     }
 
-    for (int i = 0; i < tamaño; i++) {
+    for (int i = 0; i < largo; i++) {
         outputFile << arreglo[i] << " ";
     }
     outputFile.close();
